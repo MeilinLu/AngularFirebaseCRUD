@@ -13,6 +13,7 @@ export class CustomerComponent implements OnInit {
   constructor(private customerService: CustomerService) { }
 
   submitted: boolean;
+  showSuccessMessage: boolean;
   formControls = this.customerService.form.controls;
 
   ngOnInit() {
@@ -22,16 +23,19 @@ export class CustomerComponent implements OnInit {
     this.submitted = true;
     if (this.customerService.form.valid) {
       
-      //if (this.customerService.form.get('$key').value == null){
+      if (this.customerService.form.get('$key').value == null){
       // insert operation
+        this.customerService.insertCustomer(this.customerService.form.value);
+        this.showSuccessMessage = true;
+        setTimeout(() => this.showSuccessMessage = false, 3000);
       
-      // reset the flag
-      
-      //}
+      }
       //else {
       // update operation
       //}
+      // reset the flag
       this.submitted = false;
+      this.customerService.form.reset();
     }
   }
 }

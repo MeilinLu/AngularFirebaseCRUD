@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +8,8 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 export class CustomerService {
 
-  constructor() { }
-
+  constructor(private firebase: AngularFireDatabase) { }
+  customerList: AngularFireList<any>;
   // initialize form group
   // $key - primary key to uniquely identify each customer
   form = new FormGroup({
@@ -18,5 +19,19 @@ export class CustomerService {
     mobile: new FormControl('', [Validators.required, Validators.minLength(8)]),
     location: new FormControl('')
   });
+
+  getCustomers() {
+    this.customerList = this.firebase.list('customers');
+    return this.customerList.snapshotChanges();
+  }
+
+  insertCustomer(customer){
+    this.customerList.push({
+      fullName: customer.fullName,
+      email: customer.email,
+      mobile: customer.mobile,
+      location: customer.location
+    });
+  }
 }
  
