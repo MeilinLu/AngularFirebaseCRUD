@@ -12,7 +12,26 @@ export class CustomerComponent implements OnInit {
 
   constructor(private customerService: CustomerService) { }
 
+  submitted: boolean;
+  formControls = this.customerService.form.controls;
+
   ngOnInit() {
   }
 
+  onSubmit() {
+    this.submitted = true;
+    if (this.customerService.form.valid) {
+      
+      //if (this.customerService.form.get('$key').value == null){
+      // insert operation
+      
+      // reset the flag
+      
+      //}
+      //else {
+      // update operation
+      //}
+      this.submitted = false;
+    }
+  }
 }
