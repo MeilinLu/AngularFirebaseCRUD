@@ -12,6 +12,7 @@ export class CustomerListComponent implements OnInit {
 
   customerArray = [];
   showDeletedMessage:boolean;
+  searchText: string = "";
 
   ngOnInit() {
     this.customerService.getCustomers().subscribe(
@@ -31,5 +32,9 @@ export class CustomerListComponent implements OnInit {
       this.showDeletedMessage = true;
       setTimeout(() => this.showDeletedMessage = false, 3000);
     } 
+  }
+
+  filterCondition(customer) {
+    return customer.fullName.toLowerCase().indexOf(this.searchText.toLowerCase()) != -1;
   }
 }
