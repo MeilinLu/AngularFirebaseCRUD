@@ -30,9 +30,10 @@ export class CustomerComponent implements OnInit {
         setTimeout(() => this.showSuccessMessage = false, 3000);
       
       }
-      //else {
-      // update operation
-      //}
+      else {
+        // update operation
+        this.customerService.updateCustomer(this.customerService.form.value);
+      }
       // reset the flag
       this.submitted = false;
       this.customerService.form.reset();
