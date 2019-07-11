@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -6,4 +7,14 @@ import { Injectable } from '@angular/core';
 export class CustomerService {
 
   constructor() { }
+
+  // initialize form group
+  form = new FormGroup({
+    $key: new FormControl(null),
+    fullName: new FormControl(''),
+    email: new FormControl(''),
+    mobile: new FormControl(''),
+    location: new FormControl('')
+  });
 }
+ 
